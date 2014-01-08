@@ -1,4 +1,12 @@
-# Info Token 
+<pre>
+ ###                         #######
+  #  #    # ######  ####        #     ####  #    # ###### #    #
+  #  ##   # #      #    #       #    #    # #   #  #      ##   #
+  #  # #  # #####  #    #       #    #    # ####   #####  # #  #
+  #  #  # # #      #    #       #    #    # #  #   #      #  # #
+  #  #   ## #      #    #       #    #    # #   #  #      #   ##
+ ### #    # #       ####        #     ####  #    # ###### #    #
+</pre>
 
 [![Build Status](https://travis-ci.org/tothimre/hashids_timestamp_salt.png?branch=master)](https://travis-ci.org/flyingwhale/poc)
 

@@ -4,20 +4,17 @@ namespace InfoToken\Hashers\Hashids\Hasher;
 
 use Hashids\Hashids;
 use InfoToken\Hashers\CrypterInterface;
-use InfoToken\Hashers\Hashids\HashJugglers\Creator;
+use InfoToken\HashJugglers\Creator;
 
 class HashidsCrypter implements CrypterInterface
 {
-    protected $salt;
+    private  $salt;
 
-    /**
-     * @var Hashids
-     */
-    protected $crypter;
+    private  $hashidsConstructorValues;
 
-    public function setCrypter($crypter = null)
+    public function setCrypter($hashidsConstructorValues = null)
     {
-        $this->crypter = $crypter;
+        $this->hashidsConstructorValues = $hashidsConstructorValues;
     }
 
     /**
@@ -43,8 +40,8 @@ class HashidsCrypter implements CrypterInterface
      */
     public function encrypt($data)
     {
-//      public static function create(HasherInterface $hashId, $numbersArray)
-        $hash = call_user_func_array(array($this->crypter, 'encrypt' ),array_merge(Creator::getCheckerArray(), $data));
+        $hashid = $this->getHashid();
+        $hash = call_user_func_array(array($hashid, 'encrypt' ),array_merge(self::getCheckerArray(), $data));
         return $hash;
         return $this->crypter->encrypt($string);
     }
@@ -59,5 +56,22 @@ class HashidsCrypter implements CrypterInterface
     }
 
 
+    private function getHashid()
+    {
+        return  new Hashids($this->salt,
+                            $this->hashidsConstructorValues->getMinHashLength(),
+                            $this->hashidsConstructorValues->getAlphabet());
+    }
+
+    public static function getCheckerArray(){
+        return array(
+            123456,789012,345678,901234,567890,
+            123456,789012,345678,901234,567890,
+            123456,789012,345678,901234,567890,
+            123456,789012,345678,901234,567890,
+            123456,789012,345678,901234,567890,
+            123456,789012,345678,901234,5
+        );
+    }
 
 } 

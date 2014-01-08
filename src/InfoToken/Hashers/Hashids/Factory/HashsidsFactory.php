@@ -12,35 +12,39 @@ class HashsidsFactory
     const ACTUAL_INTERVAL_START_INDEX = 0;
     const PREVIOUS_INTERVAL_START_INDEX = 1;
 
-    public static function getDecryptHashids(HasherConstructorValues $hashidConstructorValues, TimeInterval $timeinterval)
+    public function getDecryptHashers(HasherConstructorValues $hashidConstructorValues, TimeInterval $timeinterval)
     {
         return array(
-            self::getHashid($hashidConstructorValues, $timeinterval->getIntervalStartTime()),
-            self::getHashid($hashidConstructorValues, $timeinterval->getPreviousIntervalStartTime()),
+            $this->getHashid($hashidConstructorValues, $timeinterval->getIntervalStartTime()),
+            $this->getHashid($hashidConstructorValues, $timeinterval->getPreviousIntervalStartTime()),
         );
     }
 
     /**
-     * @param HasherConstructorValues $hashidConstructorValues
+     * @param HasherConstructorValues $hasherConstructorValues
      * @param TimeInterval $timeinterval
      * @return CrypterInterface HashidsCrypter
      */
-    public static function getEncryptHashids(HasherConstructorValues $hashidConstructorValues, TimeInterval $timeinterval)
+    public function getEncryptHasher(HasherConstructorValues $hasherConstructorValues, TimeInterval $timeinterval)
     {
-        $hashid =  self::getHashid($hashidConstructorValues, $timeinterval->getIntervalStartTime());
-
-
+//      $hashid =  $this->getHashid($hasherConstructorValues, $timeinterval->getIntervalStartTime());
         $crypter = new HashidsCrypter();
-        $crypter->setCrypter($hashid);
-        $crypter->setSalt($hashidConstructorValues->getSalt().$timeinterval->getIntervalStartTime());
+        $crypter->setCrypter($hasherConstructorValues);
+        $crypter->setSalt($hasherConstructorValues->getSalt().$timeinterval->getIntervalStartTime());
 
         return $crypter;
     }
 
-    protected static function getHashid(HasherConstructorValues $hashidConstructorValues, $timestamp)
+    /**
+     * @param HasherConstructorValues $hashidConstructorValues
+     * @param $timestamp
+     * @return Hashids
+     */
+    protected function getHashid(HasherConstructorValues $hashidConstructorValues, $timestamp)
     {
         return  new Hashids($hashidConstructorValues->getSalt().$timestamp,
-            $hashidConstructorValues->getMinHashLength(), $hashidConstructorValues->getAlphabet());
+                            $hashidConstructorValues->getMinHashLength(),
+                            $hashidConstructorValues->getAlphabet());
     }
 
 }
