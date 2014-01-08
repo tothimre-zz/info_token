@@ -1,19 +1,19 @@
 <?php
-namespace InfoToken\Hashids\HashJugglers;
+namespace InfoToken\Hashers\Hashids\HashJugglers;
 
 use Hashids\Hashids;
-use InfoToken\Hashids\Container\HashidsContainers;
+use InfoToken\Hashers\CheckerInterface;
+use InfoToken\Hashers\HasherContainersInterface;
 
-class Checker
+class Checker implements CheckerInterface
 {
-    public static function check(HashidsContainers $hashIdContainers, $stringToCheck)
+    public static function check(HasherContainersInterface $hashIdContainers, $stringToCheck)
     {
-        $hashIds = $hashIdContainers->getHashids();
+        $hashIds = $hashIdContainers->getHashers();
         /** @var Hashids $hashId */
         $hash = array();
         foreach ($hashIds as $hashId){
             $hash = $hashId->decrypt($stringToCheck);
-//            var_dump($hash);
             $checkerArray =  Creator::getCheckerArray();
             $hashCount = count($checkerArray);
             $broken = false;

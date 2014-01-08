@@ -4,7 +4,7 @@ use InfoToken\TimeInterval;
 
 class TimeIntervalTest extends \PHPUnit_Framework_TestCase {
 
-    const DEFAULT_INTERVAL = 5;
+    const DEFAULT_INTERVAL = 2;
 
     protected $interval;
     protected $timeInterval;
@@ -13,8 +13,8 @@ class TimeIntervalTest extends \PHPUnit_Framework_TestCase {
     public function __construct(){
         $this->interval = self::DEFAULT_INTERVAL;
         $this->timeInterval = new TimeInterval($this->interval);
-        $this->timeInterval->setCurrentTimestamp(5);
-        $this->currentTimestamp = 5;
+        $this->timeInterval->setCurrentTimestamp(2);
+        $this->currentTimestamp = 2;
     }
 
     public function testGetIntervalStartTime()
@@ -30,14 +30,6 @@ class TimeIntervalTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($baseStartTime, $timeInterval->getIntervalStartTime());
         $timeInterval->setCurrentTimestamp($currentTimestamp+1);
         $this->assertEquals($baseStartTime, $timeInterval->getIntervalStartTime());
-        $timeInterval->setCurrentTimestamp($currentTimestamp+2);
-        $this->assertEquals($baseStartTime, $timeInterval->getIntervalStartTime());
-        $timeInterval->setCurrentTimestamp($currentTimestamp+3);
-        $this->assertEquals($baseStartTime, $timeInterval->getIntervalStartTime());
-        $timeInterval->setCurrentTimestamp($currentTimestamp+4);
-        $this->assertEquals($baseStartTime, $timeInterval->getIntervalStartTime());
-        $timeInterval->setCurrentTimestamp($currentTimestamp+5);
-        $this->assertNotEquals($baseStartTime, $timeInterval->getIntervalStartTime());
     }
 
 

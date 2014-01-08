@@ -15,7 +15,8 @@
 
     "require": {
         "php": ">=5.3.0",
-        "hashids/hashids": "0.3.*@dev"
+        "hashids/hashids": "0.3.*@dev",
+        "phpseclib/phpseclib": "dev-php5"
     },
 
     "require-dev": {

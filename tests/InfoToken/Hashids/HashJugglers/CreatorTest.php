@@ -1,19 +1,19 @@
 <?php
-
-use InfoToken\Hashids\Container\HashidsContainers;
-use InfoToken\Hashids\Factory\HashsidsFactory;
-use InfoToken\HashidsConstructorValues;
+use InfoToken\Hashers\Hashids\Factory\HashsidsFactory;
+use InfoToken\Hashers\Hashids\HasherConstructorValues;
 use InfoToken\TimeInterval;
-use InfoToken\Hashids\HashJugglers\Creator;
+use InfoToken\Hashers\Hashids\HashJugglers\Creator;
 
 class CreatorTest extends \PHPUnit_Framework_TestCase
 {
     const DEF_INTERVAL = 5;
 
     public function testCreate(){
-        $HashidsConstructorValues = new HashidsConstructorValues();
+        $HashidsConstructorValues = new HasherConstructorValues();
         $interval = new TimeInterval(self::DEF_INTERVAL);
         $hasher = HashsidsFactory::getEncryptHashids($HashidsConstructorValues, $interval);
-        $this->assertNotEquals('',Creator::create($hasher,array(123456, 123457, 123458)));
+        $hash = $hasher->encrypt(array(123456, 123457, 123458));
+        $this->assertNotEquals('', $hash);
+
     }
 } 

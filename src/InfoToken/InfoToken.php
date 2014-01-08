@@ -4,7 +4,7 @@ namespace InfoToken;
 class InfoToken
 {
     /**
-     * @var \InfoToken\HashidsConstructorValues
+     * @var \InfoToken\Hashers\Hashids\HasherConstructorValues
      */
     protected $hashidsConstructorValues;
 
@@ -23,7 +23,7 @@ class InfoToken
     }
 
     /**
-     * @param \InfoToken\HashidsConstructorValues $hashidsConstructorValues
+     * @param \InfoToken\Hashers\Hashids\HasherConstructorValues $hashidsConstructorValues
      */
     public function setHashidsConstructorValues($hashidsConstructorValues)
     {
@@ -31,7 +31,7 @@ class InfoToken
     }
 
     /**
-     * @return \InfoToken\HashidsConstructorValues
+     * @return \InfoToken\Hashers\Hashids\HasherConstructorValues
      */
     public function getHashidsConstructorValues()
     {

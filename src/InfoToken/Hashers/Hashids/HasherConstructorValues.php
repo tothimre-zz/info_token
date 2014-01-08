@@ -1,9 +1,9 @@
 <?php
 
-namespace InfoToken;
+namespace InfoToken\Hashers\Hashids;
 
 
-class HashidsConstructorValues
+class HasherConstructorValues
 {
     protected $salt;
 
@@ -67,7 +67,5 @@ class HashidsConstructorValues
     {
         return $this->salt;
     }
-
-
 
 }
