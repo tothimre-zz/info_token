@@ -14,6 +14,5 @@ class CreatorTest extends \PHPUnit_Framework_TestCase
         $hasher = HashsidsFactory::getEncryptHashids($HashidsConstructorValues, $interval);
         $hash = $hasher->encrypt(array(123456, 123457, 123458));
         $this->assertNotEquals('', $hash);
-
     }
 } 

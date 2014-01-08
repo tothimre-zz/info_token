@@ -14,10 +14,9 @@ class HashsidsFactory
 
     public static function getDecryptHashids(HasherConstructorValues $hashidConstructorValues, TimeInterval $timeinterval)
     {
-        return array(self::ACTUAL_INTERVAL_START_INDEX =>new Hashids($hashidConstructorValues->getSalt().$timeinterval->getIntervalStartTime(),
-                $hashidConstructorValues->getMinHashLength(), $hashidConstructorValues->getAlphabet()),
-            self::PREVIOUS_INTERVAL_START_INDEX =>new Hashids($hashidConstructorValues->getSalt().$timeinterval->getPreviousIntervalStartTime(),
-                    $hashidConstructorValues->getMinHashLength(), $hashidConstructorValues->getAlphabet())
+        return array(
+            self::getHashid($hashidConstructorValues, $timeinterval->getIntervalStartTime()),
+            self::getHashid($hashidConstructorValues, $timeinterval->getPreviousIntervalStartTime()),
         );
     }
 
@@ -28,8 +27,7 @@ class HashsidsFactory
      */
     public static function getEncryptHashids(HasherConstructorValues $hashidConstructorValues, TimeInterval $timeinterval)
     {
-        $hashid =  new Hashids($hashidConstructorValues->getSalt().$timeinterval->getIntervalStartTime(),
-                           $hashidConstructorValues->getMinHashLength(), $hashidConstructorValues->getAlphabet());
+        $hashid =  self::getHashid($hashidConstructorValues, $timeinterval->getIntervalStartTime());
 
 
         $crypter = new HashidsCrypter();
@@ -37,6 +35,12 @@ class HashsidsFactory
         $crypter->setSalt($hashidConstructorValues->getSalt().$timeinterval->getIntervalStartTime());
 
         return $crypter;
+    }
+
+    protected static function getHashid(HasherConstructorValues $hashidConstructorValues, $timestamp)
+    {
+        return  new Hashids($hashidConstructorValues->getSalt().$timestamp,
+            $hashidConstructorValues->getMinHashLength(), $hashidConstructorValues->getAlphabet());
     }
 
 }
