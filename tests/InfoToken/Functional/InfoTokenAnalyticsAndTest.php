@@ -25,10 +25,10 @@ class InfoTokenAnalyticsAndTest extends \PHPUnit_Framework_TestCase
 
         $stopwatch = new Stopwatch();
 
-//        $events = array();
-//        $eventSections = array();
-//        $tstCnt = 0;
-//
+        $events = array();
+        $eventSections = array();
+        $tstCnt = 0;
+
 //        $c = 1009;
 //        $values = array();
 //        for ($i=0;$i<$c;$i++)
@@ -63,7 +63,7 @@ class InfoTokenAnalyticsAndTest extends \PHPUnit_Framework_TestCase
 //        $stopwatch->stopSection('getMemecached');
 //        $time = microtime()-$start;
 //        echo "memcached get: $time\n";
-//
+
         for($testNumber = 0; $testNumber <= 1000 ; $testNumber+=100 )
         {
             for($measurementTimeShift = 0; $measurementTimeShift <= self::DEF_INTERVAL; $measurementTimeShift++ ){
@@ -91,7 +91,6 @@ class InfoTokenAnalyticsAndTest extends \PHPUnit_Framework_TestCase
                     $stopwatch->openSection($this->checkEventSection($eventSections, 'encrypt'));
                     $stopwatch->start($encryptTimeId);
                     $hash = $hasher->encrypt(array($testNumber,$testNumber+1));
-//                    $hash = $hasher->encrypt($fakedata);
                     $events[$encryptTimeId] = $stopwatch->stop($encryptTimeId);
                     $stopwatch->stopSection('encrypt');
 

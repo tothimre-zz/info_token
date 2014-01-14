@@ -20,6 +20,7 @@
     },
 
     "require-dev": {
+        "symfony/stopwatch": "dev-master",
         "phpunit/phpunit": "3.7.*"
     },
 
